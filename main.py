@@ -1,5 +1,24 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
+
+pessoas_cadastradas = []
+
+def mostrar_tabela():
+    janela_tabela = tk.Toplevel()
+    janela_tabela.title("Pessoas Cadastradas")
+    janela_tabela.geometry("600x300")
+    
+    colunas = ("Nome", "Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade")
+    tree = ttk.Treeview(janela_tabela, columns=colunas, show="headings")
+    
+    for coluna in colunas:
+        tree.heading(coluna, text=coluna)
+        tree.column(coluna, anchor='center', minwidth=100, width=100)
+    
+    for pessoa in pessoas_cadastradas:
+        tree.insert("", tk.END, values=pessoa)
+    
+    tree.pack(expand=True, fill=tk.BOTH, padx=10, pady=10)
 
 def salvar_pessoa():
     nome = entry_nome.get()
@@ -21,9 +40,19 @@ def salvar_pessoa():
             salario = float(salario)
 
             if aceita_termos:
-                messagebox.showinfo("Cadastro Concluído", 
-                                    f"Nome: {nome}\nIdade: {idade} anos\nAltura: {altura} m\nProfissão: {profissao}\nSalário: R${salario:.2f}\n"
-                                    f"Gênero: {genero}\nCidade: {cidade}\nTermos aceitos: Sim")
+                pessoa = (nome, idade, altura, profissao, salario, genero, cidade)
+                pessoas_cadastradas.append(pessoa)
+                
+                entry_nome.delete(0, tk.END)
+                entry_idade.delete(0, tk.END)
+                entry_altura.delete(0, tk.END)
+                entry_profissao.delete(0, tk.END)
+                entry_salario.delete(0, tk.END)
+                
+                messagebox.showinfo("Cadastro Concluído", "Pessoa cadastrada com sucesso!")
+                
+                mostrar_tabela()
+                
             else:
                 messagebox.showwarning("Erro", "Você deve aceitar os termos para continuar.")
         except ValueError:
@@ -34,6 +63,7 @@ def salvar_pessoa():
 janela = tk.Tk()
 janela.title("Cadastro de Pessoa")
 janela.geometry("400x450")
+
 
 label_nome = tk.Label(janela, text="Nome:")
 label_nome.grid(row=0, column=0, padx=10, pady=5, sticky='e')
@@ -81,7 +111,7 @@ label_cidade.grid(row=7, column=0, padx=10, pady=5, sticky='e')
 cidades = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Brasília"]
 
 cidade_var = tk.StringVar()
-cidade_var.set(cidades[0]) 
+cidade_var.set(cidades[0])  
 
 optionmenu_cidades = tk.OptionMenu(janela, cidade_var, *cidades)
 optionmenu_cidades.grid(row=7, column=1, padx=10, pady=5)
