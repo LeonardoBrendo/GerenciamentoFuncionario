@@ -8,7 +8,7 @@ def mostrar_tabela():
     janela_tabela.title("Pessoas Cadastradas")
     janela_tabela.geometry("600x300")
     
-    colunas = ("Nome", "Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade")
+    colunas = ("Nome", "Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade", "CPF")
     tree = ttk.Treeview(janela_tabela, columns=colunas, show="headings")
     
     for coluna in colunas:
