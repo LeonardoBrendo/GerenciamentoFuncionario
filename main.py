@@ -126,9 +126,9 @@ optionmenu_cidades.grid(row=9, column=1, padx=10, pady=5)
 
 check_termos_var = tk.BooleanVar()
 check_termos = tk.Checkbutton(janela, text="Aceito os Termos de Serviço", variable=check_termos_var)
-check_termos.grid(row=9, columnspan=2, pady=10)
+check_termos.grid(row=10, columnspan=2, pady=10)
 
 botao_salvar = tk.Button(janela, text="Salvar", command=salvar_pessoa)
-botao_salvar.grid(row=10, columnspan=2, pady=10)
+botao_salvar.grid(row=11, columnspan=2, pady=10)
 
 janela.mainloop()
