@@ -8,7 +8,7 @@ def mostrar_tabela():
     janela_tabela.title("Pessoas Cadastradas")
     janela_tabela.geometry("600x300")
     
-    colunas = ("Nome", "Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade", "CPF")
+    colunas = ("Nome", "Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade", "CPF","RG")
     tree = ttk.Treeview(janela_tabela, columns=colunas, show="headings")
     
     for coluna in colunas:
@@ -22,6 +22,7 @@ def mostrar_tabela():
 
 def salvar_pessoa():
     nome = entry_nome.get()
+    rg = entry_rg.get()
     idade = entry_idade.get()
     altura = entry_altura.get()
     profissao = entry_profissao.get()
@@ -34,7 +35,7 @@ def salvar_pessoa():
     
     aceita_termos = check_termos_var.get()
     
-    if nome and idade and altura and profissao and salario and email:
+    if nome and idade and altura and profissao and salario and email and rg:
         try:
             idade = int(idade)
             altura = float(altura)
@@ -50,6 +51,7 @@ def salvar_pessoa():
                 entry_profissao.delete(0, tk.END)
                 entry_salario.delete(0, tk.END)
                 entry_email.delete(0, tk.END)
+                entry_rg.delete(0, tk.END)
                 
                 messagebox.showinfo("Cadastro Concluído", "Pessoa cadastrada com sucesso!")
                 
@@ -127,6 +129,12 @@ optionmenu_cidades.grid(row=9, column=1, padx=10, pady=5)
 check_termos_var = tk.BooleanVar()
 check_termos = tk.Checkbutton(janela, text="Aceito os Termos de Serviço", variable=check_termos_var)
 check_termos.grid(row=9, columnspan=2, pady=10)
+
+label_rg = tk.Label(janela, text="RG:")
+label_rg.grid(row=10, column=1, padx=10, pady=5, sticky='e')
+
+entry_rg = tk.Entry(janela)
+entry_rg.grid(row=10, column=0, padx=10, pady=5)
 
 botao_salvar = tk.Button(janela, text="Salvar", command=salvar_pessoa)
 botao_salvar.grid(row=10, columnspan=2, pady=10)
