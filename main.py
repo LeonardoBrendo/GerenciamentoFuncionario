@@ -36,6 +36,12 @@ def salvar_pessoa():
     aceita_termos = check_termos_var.get()
     
     if nome and idade and altura and profissao and salario and email:
+        print("nome", nome)
+        print("idade", idade)
+        print("altura", altura)
+        print("profissao", profissao)
+        print("salario", salario)
+        print("email", email)
         try:
             cpf = int(cpf)
             idade = int(idade)
@@ -107,18 +113,17 @@ entry_salario = tk.Entry(janela)
 entry_salario.grid(row=5, column=1, padx=10, pady=5)
 
 label_email = tk.Label(janela, text="Email : ")
-label_email.grid(row=5, column=0, padx=10, pady=5, sticky='e')
+label_email.grid(row=6, column=0, padx=10, pady=5, sticky='e')
 
 entry_email = tk.Entry(janela)
-entry_email.grid(row=5, column=1, padx=10, pady=5)
+entry_email.grid(row=6, column=1, padx=10, pady=5)
 
 label_genero = tk.Label(janela, text="Gênero:")
-label_genero.grid(row=6, column=0, padx=10, pady=5, sticky='e')
+label_genero.grid(row=7, column=0, padx=10, pady=5, sticky='e')
 
 genero_var = tk.StringVar(value="Masculino")
 radiobutton_masc = tk.Radiobutton(janela, text="Masculino", variable=genero_var, value="Masculino")
 radiobutton_fem = tk.Radiobutton(janela, text="Feminino", variable=genero_var, value="Feminino")
-
 
 radiobutton_masc.grid(row=7, column=1, padx=10, sticky='w')
 radiobutton_fem.grid(row=8, column=1, padx=10, sticky='w')
@@ -131,7 +136,7 @@ cidades = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Brasí
 cidade_var = tk.StringVar()
 cidade_var.set(cidades[0])  
 
-
+optionmenu_cidades = tk.OptionMenu(janela, cidade_var, *cidades)
 optionmenu_cidades.grid(row=9, column=1, padx=10, pady=5)
 
 check_termos_var = tk.BooleanVar()
