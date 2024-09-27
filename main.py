@@ -8,7 +8,7 @@ def mostrar_tabela():
     janela_tabela.title("Pessoas Cadastradas")
     janela_tabela.geometry("600x300")
     
-    colunas = ("Nome", "Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade", "CPF")
+    colunas = ("Nome", "CPF", "Email","Idade", "Altura", "Profissão", "Salário", "Gênero", "Cidade")
     tree = ttk.Treeview(janela_tabela, columns=colunas, show="headings")
     
     for coluna in colunas:
@@ -22,6 +22,7 @@ def mostrar_tabela():
 
 def salvar_pessoa():
     nome = entry_nome.get()
+    cpf = entry_cpf.get()
     idade = entry_idade.get()
     altura = entry_altura.get()
     profissao = entry_profissao.get()
@@ -36,15 +37,17 @@ def salvar_pessoa():
     
     if nome and idade and altura and profissao and salario and email:
         try:
+            cpf = int(cpf)
             idade = int(idade)
             altura = float(altura)
             salario = float(salario)
 
             if aceita_termos:
-                pessoa = (nome, idade, altura, profissao, salario, genero, cidade)
+                pessoa = (nome, cpf, idade, altura, profissao, salario, genero, cidade)
                 pessoas_cadastradas.append(pessoa)
                 
                 entry_nome.delete(0, tk.END)
+                entry_cpf.delete(0, tk.END)
                 entry_idade.delete(0, tk.END)
                 entry_altura.delete(0, tk.END)
                 entry_profissao.delete(0, tk.END)
@@ -73,29 +76,35 @@ label_nome.grid(row=0, column=0, padx=10, pady=5, sticky='e')
 entry_nome = tk.Entry(janela)
 entry_nome.grid(row=0, column=1, padx=10, pady=5)
 
+label_cpf = tk.Label(janela, text="CPF:")
+label_cpf.grid(row=1, column=0, padx=10, pady=5, sticky='e')
+
+entry_cpf = tk.Entry(janela)
+entry_cpf.grid(row=1, column=1, padx=10, pady=5)
+
 label_idade = tk.Label(janela, text="Idade:")
-label_idade.grid(row=1, column=0, padx=10, pady=5, sticky='e')
+label_idade.grid(row=2, column=0, padx=10, pady=5, sticky='e')
 
 entry_idade = tk.Entry(janela)
-entry_idade.grid(row=1, column=1, padx=10, pady=5)
+entry_idade.grid(row=2, column=1, padx=10, pady=5)
 
 label_altura = tk.Label(janela, text="Altura (m):")
-label_altura.grid(row=2, column=0, padx=10, pady=5, sticky='e')
+label_altura.grid(row=3, column=0, padx=10, pady=5, sticky='e')
 
 entry_altura = tk.Entry(janela)
-entry_altura.grid(row=2, column=1, padx=10, pady=5)
+entry_altura.grid(row=3, column=1, padx=10, pady=5)
 
 label_profissao = tk.Label(janela, text="Profissão:")
-label_profissao.grid(row=3, column=0, padx=10, pady=5, sticky='e')
+label_profissao.grid(row=4, column=0, padx=10, pady=5, sticky='e')
 
 entry_profissao = tk.Entry(janela)
-entry_profissao.grid(row=3, column=1, padx=10, pady=5)
+entry_profissao.grid(row=4, column=1, padx=10, pady=5)
 
 label_salario = tk.Label(janela, text="Salário (R$):")
-label_salario.grid(row=4, column=0, padx=10, pady=5, sticky='e')
+label_salario.grid(row=5, column=0, padx=10, pady=5, sticky='e')
 
 entry_salario = tk.Entry(janela)
-entry_salario.grid(row=4, column=1, padx=10, pady=5)
+entry_salario.grid(row=5, column=1, padx=10, pady=5)
 
 label_email = tk.Label(janela, text="Email : ")
 label_email.grid(row=5, column=0, padx=10, pady=5, sticky='e')
@@ -110,6 +119,7 @@ genero_var = tk.StringVar(value="Masculino")
 radiobutton_masc = tk.Radiobutton(janela, text="Masculino", variable=genero_var, value="Masculino")
 radiobutton_fem = tk.Radiobutton(janela, text="Feminino", variable=genero_var, value="Feminino")
 
+
 radiobutton_masc.grid(row=7, column=1, padx=10, sticky='w')
 radiobutton_fem.grid(row=8, column=1, padx=10, sticky='w')
 
@@ -121,7 +131,7 @@ cidades = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Brasí
 cidade_var = tk.StringVar()
 cidade_var.set(cidades[0])  
 
-optionmenu_cidades = tk.OptionMenu(janela, cidade_var, *cidades)
+
 optionmenu_cidades.grid(row=9, column=1, padx=10, pady=5)
 
 check_termos_var = tk.BooleanVar()
