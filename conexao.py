@@ -16,7 +16,7 @@ class Pessoa(Base):
     profissao = Column(String, nullable=False)
 
 # Conectando ao banco de dados PostgreSQL
-DATABASE_URL = "postgresql+psycopg2://x:y@localhost/senac"
+DATABASE_URL = "postgresql+psycopg2://user:pass@localhost/senac"
 engine = create_engine(DATABASE_URL)
 
 # Criando as tabelas no banco de dados
